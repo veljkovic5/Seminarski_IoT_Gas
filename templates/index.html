@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Monitoring Gasa</title>
+</head>
+<body>
+    <h1>Sistem za monitoring zagađenja vazduha</h1>
+    <div id="readings-container">
+        <h2>Poslednja očitavanja:</h2>
+        <ul id="readings-list"></ul>
+    </div>
+
+    <script>
+        async function fetchReadings() {
+            const response = await fetch('/api/readings');
+            const data = await response.json();
+            const list = document.getElementById('readings-list');
+            list.innerHTML = '';
+            
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `[${item.timestamp}] Vrednost: ${item.value} - Status: ${item.status}`;
+                if(item.status === 'ALARM') li.style.color = 'red';
+                list.appendChild(li);
+            });
+        }
+
+        // Osvežava podatke na svakih 2 sekunde
+        setInterval(fetchReadings, 2000);
+        fetchReadings();
+    </script>
+</body>
+</html>

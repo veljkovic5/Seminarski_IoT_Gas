@@ -1,0 +1,4 @@
+.venv-flask/
+gas_data.db
+__pycache__/
+*.pyc
