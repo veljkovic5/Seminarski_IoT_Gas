@@ -2,7 +2,7 @@ import serial
 import requests
 import time
 
-SERIAL_PORT = 'COM3'  # Promeni u svoj COM port na kome je Arduino
+SERIAL_PORT = 'COM3' 
 BAUD_RATE = 9600
 
 try:
